@@ -11,15 +11,21 @@ public class MqMessageReceiver {
         connection.start();
 
         final Session session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
-        Destination destination = session.createQueue("my-queue");
+        Destination destination = session.createQueue("example1-queue");
 
         MessageConsumer consumer = session.createConsumer(destination);
 
-        TextMessage message = (TextMessage) consumer.receive();
-        while (message != null) {
-            String text = message.getText();
-            System.out.println(text);
-            session.commit();
+        while (true) {
+            TextMessage message = (TextMessage) consumer.receive();
+            if (message != null) {
+                String text = message.getText();
+                System.out.println(text);
+                System.out.println(message.getStringProperty("username"));
+                message.acknowledge();
+                session.commit();
+            } else {
+                break;
+            }
         }
         consumer.close();
         session.close();

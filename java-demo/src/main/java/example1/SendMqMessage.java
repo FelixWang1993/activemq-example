@@ -11,12 +11,14 @@ public class SendMqMessage {
         connection.start();
 
         Session session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
-        Destination destination = session.createQueue("my-queue");
+        Destination destination = session.createQueue("example1-queue");
 
         MessageProducer producer = session.createProducer(destination);
 
         for(int i = 0; i<3; i++) {
             TextMessage message = session.createTextMessage("message-" + i);
+            message.setStringProperty("username","aaa");
+
             Thread.sleep(1000);
             producer.send(message);
         }
