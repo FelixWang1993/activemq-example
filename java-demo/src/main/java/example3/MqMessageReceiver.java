@@ -1,4 +1,4 @@
-package example1;
+package example3;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 
@@ -11,7 +11,7 @@ public class MqMessageReceiver {
         connection.start();
 
         final Session session = connection.createSession(Boolean.TRUE, Session.AUTO_ACKNOWLEDGE);
-        Destination destination = session.createQueue("example1-queue");
+        Destination destination = session.createQueue("example3-queue");
 
         MessageConsumer consumer = session.createConsumer(destination);
 
@@ -20,6 +20,7 @@ public class MqMessageReceiver {
             if (message != null) {
                 String text = message.getText();
                 System.out.println(text);
+                System.out.println(message.getStringProperty("username"));
                 message.acknowledge();
                 session.commit();
             } else {
