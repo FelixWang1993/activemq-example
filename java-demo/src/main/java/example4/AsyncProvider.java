@@ -63,7 +63,7 @@ public class AsyncProvider {
                 }
             });
         }
-        System.out.println("finish");
+        System.out.println("finish send message");
         // 9.关闭资源
         activeMQMessageProducer.close();
         session.close();
