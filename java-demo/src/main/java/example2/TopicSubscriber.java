@@ -28,7 +28,7 @@ public class TopicSubscriber {
             TextMessage message = (TextMessage) consumer.receive();
             if (message != null) {
                 String text = message.getText();
-                System.out.println(text);
+                System.out.println("topic receiver1: " + text);
             } else {
                 break;
             }
