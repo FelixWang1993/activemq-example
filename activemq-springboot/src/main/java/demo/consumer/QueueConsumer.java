@@ -1,7 +1,6 @@
 package demo.consumer;
 
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
